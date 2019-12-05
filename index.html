@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Editor </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+        function run() {
+            var code = document.getElementById('editor').value;
+            try {
+                eval(code);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        function onClickClear() {
+            $("p").remove();
+        }
+        if (typeof console != "undefined")
+            if (typeof console.log != 'undefined')
+                console.olog = console.log;
+            else
+                console.olog = console.error;
+
+        console.log = function (message) {
+            console.olog(message);
+            $('#debugDiv').append('<p>' + message + '</p>');
+            $('#debugDiv').css('color', 'white');
+
+        };
+        console.error = function (message) {
+            console.olog(message);
+            $('#debugDiv').append('<p>' + message + '</p>');
+            $('#debugDiv').css('color', 'red');
+        };
+        console.debug = console.info = console.log
+
+    </script>
+    <style>
+        #editor {
+            height: 50vh;
+            width: 98vw;
+            font-size: 16px;
+            margin-left: 8px;
+            margin-top: 5px;
+            background: #222;
+            color: #fff;
+        }
+
+        #debugDiv {
+            max-height: 25vh;
+            width: 98vw;
+            background: #222;
+            color: rgb(250, 249, 249);
+            margin-top: 5px;
+            margin-left: 8px;
+            overflow: auto
+        }
+
+        #console {
+            height: 4vh;
+            width: 98vw;
+            background: rgb(73, 71, 71);
+            color: rgb(250, 249, 249);
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="text-info">Your JS goes here!</h1>
+    <textarea name="jsEditor" id="editor" spellcheck="false"></textarea>
+    <div class="text-right">
+        <button type="button" class="btn btn-primary mr-1" onclick="run()">Run</button>
+        <button type="button" class="btn btn-danger mr-4" onclick="onClickClear()">Clear</button>
+    </div>
+    <div id="console">Console</div>
+    <div id="debugDiv">
+    </div>
+
+</body>
+
+</html>
